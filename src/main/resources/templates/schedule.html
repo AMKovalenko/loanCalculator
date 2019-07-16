@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Loan Calculator</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}"/>
+</head>
+<body>
+<h1>Loan Calculator</h1>
+
+<form th:action="@{/calculate}" th:object="${loanForm}" method="POST">
+    <table >
+        <tr>
+            <td>Amount:</td>
+            <td><input type="text" th:field="*{amount}"/></td>
+            <td th:rowspan="2">Monthly payment:</td>
+            <td th:rowspan="2" th:width="200" th:utext="${response.getMonthlyPayment()}"></td>
+        </tr>
+        <tr>
+            <td>Term:</td>
+            <td><input type="text" th:field="*{term}" /></td>
+        </tr>
+        <tr>
+            <td>Rate:</td>
+            <td><input type="text" th:field="*{yearInterestRate}" /></td>
+            <td>Total interest:</td>
+            <td th:utext="${response.getTotalInterest()}">Interest</td>
+        </tr>
+        <tr>
+            <td>Start date:</td>
+            <td><input type="text" th:field="*{loanDate}"/></td>
+            <td>Total payment amount</td>
+            <td th:width="200" th:utext="${response.getTotalPaymentAmount()}"></td>
+        </tr>
+    </table>
+    <input type="submit" value="Create" />
+</form>
+
+<br/><br/>
+<div>
+    <table border="1">
+        <tr>
+            <th>№</th>
+            <th>Дата платежа</th>
+            <th>Величина платежа</th>
+            <th>Основной долг</th>
+            <th>Проценты</th>
+            <th>Остаток долга</th>
+        </tr>
+        <tr th:each ="schedule : ${response.getSchedules()}">
+            <td th:utext="${schedule.number}">№</td>
+            <td th:utext="${schedule.paymentDate}">Payment date</td>
+            <td th:utext="${schedule.paymentAmount}">...</td>
+            <td th:utext="${schedule.mainDebt}">...</td>
+            <td th:utext="${schedule.interest}">...</td>
+            <td th:utext="${schedule.remainMainDebt}">...</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

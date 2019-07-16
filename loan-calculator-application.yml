@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: loan-calculator
+  thymeleaf:
+    cache: false
+
+server:
+  port: 8088
+  servlet:
+    context-path: /loan-calculator

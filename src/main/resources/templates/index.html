@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Loan Calculator</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}"/>
+</head>
+<body>
+<h1>Loan Calculator</h1>
+
+<form th:action="@{/calculate}" th:object="${loanForm}" method="POST">
+    <table>
+        <tr>
+            <td>Amount:</td>
+            <td><input type="text" th:field="*{amount}"/></td>
+        </tr>
+        <tr>
+            <td>Term:</td>
+            <td><input type="text" th:field="*{term}"/></td>
+        <tr>
+            <td>Rate:</td>
+            <td><input type="text" th:field="*{yearInterestRate}"/></td>
+        <tr>
+            <td>Start date:</td>
+            <td><input type="text" th:field="*{loanDate}"/></td>
+    </table>
+    <input type="submit" value="Create"/>
+</form>
+</body>
+</html>
